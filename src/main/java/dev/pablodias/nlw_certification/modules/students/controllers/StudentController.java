@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class StudentController {
 
    @Autowired
-   private VerifyIfHasCertificationService service;
+   private VerifyIfHasCertificationService verifyIfHasCertificationService;
 
    @PostMapping("/verifyhascertification")
    public String verifyIfHasCertification(@RequestBody VerifyHasCertificationDTO verifyHasCertificationDTO) {
-      var itHasCertification = this.service.execute(verifyHasCertificationDTO);
+      var itHasCertification = this.verifyIfHasCertificationService.execute(verifyHasCertificationDTO);
 
       if (itHasCertification) {
          return "Usuário não pode fazer a prova";
