@@ -1,6 +1,5 @@
 package dev.pablodias.nlw_certification.modules.students.entities;
 
-import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -10,8 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentEntity {
+public class AnswersCertificationsEntity {
    private UUID id;
-   private String email;
-   private List<CertificationStudentEntity> certificationStudentEntities;
+   private UUID certificationID;
+   private UUID studentID;
+   private UUID questionID;
+   private UUID answerID;
+   private Boolean isCorrect;
 }
