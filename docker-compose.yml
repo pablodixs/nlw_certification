@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres_nlw:
     container_name: postgres_nlw
-    image: postgreslq
+    image: postgres
     ports:
       - 5434:5432
     environment:
