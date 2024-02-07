@@ -13,8 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "answers_certification_students")
+@Entity(name = "answers_certification_students")
 public class AnswersCertificationsEntity {
 
    @Id

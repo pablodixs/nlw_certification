@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "certifications")
+@Entity(name = "certifications")
 public class CertificationStudentEntity {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
