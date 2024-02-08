@@ -3,6 +3,7 @@ package dev.pablodias.nlw_certification.modules.students.entities;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.metamodel.Type;
@@ -21,7 +22,7 @@ public class CertificationStudentEntity {
    @GeneratedValue(strategy = GenerationType.UUID)
    private UUID id;
 
-   @JoinColumn(name = "student_id", insertable = false, updatable = false)
+   @Column(name = "student_id")
    private UUID studentID;
 
    @Column(length = 100)

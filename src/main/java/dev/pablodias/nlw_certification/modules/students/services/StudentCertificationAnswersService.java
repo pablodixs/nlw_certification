@@ -4,6 +4,7 @@ import dev.pablodias.nlw_certification.modules.questions.entities.AlternativeEnt
 import dev.pablodias.nlw_certification.modules.questions.entities.QuestionEntity;
 import dev.pablodias.nlw_certification.modules.questions.repositories.QuestionRepository;
 import dev.pablodias.nlw_certification.modules.students.DTOs.StudentCertificationAnswersDTO;
+import dev.pablodias.nlw_certification.modules.students.DTOs.VerifyHasCertificationDTO;
 import dev.pablodias.nlw_certification.modules.students.entities.AnswersCertificationsEntity;
 import dev.pablodias.nlw_certification.modules.students.entities.CertificationStudentEntity;
 import dev.pablodias.nlw_certification.modules.students.entities.StudentEntity;
@@ -21,19 +22,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class StudentCertificationAnswersService {
 
     @Autowired
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    QuestionRepository questionRepository;
+    private QuestionRepository questionRepository;
 
     @Autowired
     private CertificationStudentRepository certificationStudentRepository;
 
-    public CertificationStudentEntity execute(StudentCertificationAnswersDTO dto) {
+    @Autowired
+    private VerifyIfHasCertificationService verifyIfHasCertificationService;
+
+    public CertificationStudentEntity execute(StudentCertificationAnswersDTO dto) throws Exception {
         List<QuestionEntity> questions = questionRepository.findByTechnology(dto.getTechnology());
         List<AnswersCertificationsEntity> answersCertifications = new ArrayList<>();
 
         AtomicInteger correctAnswers = new AtomicInteger();
+
+        var verifyHasCertification = this.verifyIfHasCertificationService.execute(
+                new VerifyHasCertificationDTO(dto.getEmail(), dto.getTechnology())
+        );
+
+        if (verifyHasCertification) {
+            throw new Exception("Você já tem uma certificação.");
+        }
 
         dto.getQuestionAnswers().forEach(questionAnswer -> {
             var question = questions.stream()

@@ -3,6 +3,8 @@ package dev.pablodias.nlw_certification.modules.students.controllers;
 import dev.pablodias.nlw_certification.modules.students.DTOs.StudentCertificationAnswersDTO;
 import dev.pablodias.nlw_certification.modules.students.entities.CertificationStudentEntity;
 import dev.pablodias.nlw_certification.modules.students.services.StudentCertificationAnswersService;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pablodias.nlw_certification.modules.students.DTOs.VerifyHasCertificationDTO;
@@ -35,7 +37,12 @@ public class StudentController {
    }
 
    @PostMapping("/certification/answer")
-   public CertificationStudentEntity certificationAnswer(@RequestBody StudentCertificationAnswersDTO studentCertificationAnswersDTO) {
-      return this.studentCertificationAnswersService.execute(studentCertificationAnswersDTO);
+   public ResponseEntity<Object> certificationAnswer(@RequestBody StudentCertificationAnswersDTO studentCertificationAnswersDTO) {
+      try {
+         var result =  this.studentCertificationAnswersService.execute(studentCertificationAnswersDTO);
+         return ResponseEntity.ok().body(result);
+      } catch (Exception error) {
+         return ResponseEntity.badRequest().body(error.getMessage());
+      }
    }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +29,7 @@ public class AnswersCertificationsEntity {
 
    @ManyToOne
    @JoinColumn(name = "certification_id", insertable = false, updatable = false)
-   @JsonBackReference
+   @JsonManagedReference
    private CertificationStudentEntity certificationStudent;
 
    @Column(name = "student_id")

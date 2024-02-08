@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +27,7 @@ public class StudentEntity {
    private String email;
 
    @OneToMany(mappedBy = "studentEntity")
+   @JsonBackReference
    private List<CertificationStudentEntity> certificationStudentEntities;
 
 }
