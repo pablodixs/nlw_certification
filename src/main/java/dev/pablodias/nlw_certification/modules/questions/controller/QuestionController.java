@@ -28,6 +28,7 @@ public class QuestionController {
         return result.stream().map(question -> mapQuestionToDTO(question)).collect(Collectors.toList());
     }
 
+    // Alternativa sem o builder
     static QuestionResultDTO mapQuestionToDTO(QuestionEntity question) {
         QuestionResultDTO questionResultDTO = new QuestionResultDTO();
 
@@ -43,6 +44,7 @@ public class QuestionController {
         return questionResultDTO;
     }
 
+    // Alternativa com o builder do Spring Boot
     static AlternativesResultDTO mapAlternativeDTO(AlternativeEntity alternatives) {
         return AlternativesResultDTO.builder().id(alternatives.getId()).description(alternatives.getDescription()).build();
     }
